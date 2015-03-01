@@ -1,6 +1,6 @@
 <?php
 /**
- * Append this to your functions.php file insie your Wordpress theme
+ * Append this to your functions.php file inside your Wordpress theme
  */
 
 

@@ -36,7 +36,7 @@ server {
 
                 # FILE UPLOADS
                 if ($request_method = 'POST') {
-                        more_set_headers 'Access-Control-Allow-Origin: http://allowd-domain.com';
+                        more_set_headers 'Access-Control-Allow-Origin: http://allowed-domain.com';
                         proxy_pass http://127.0.0.1:3000;
                 }
         }
