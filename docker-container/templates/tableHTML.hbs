@@ -1,0 +1,33 @@
+{{#if tableBegin}}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th class="col-xs-3"></th>
+            <th class="col-xs-6"></th>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-1"></th>
+        </tr>
+    </thead>
+    <tbody>
+{{/if}}
+        <tr>
+            <td class="name{{className}} col-xs-3">
+                <p class="">{{0}}</p>
+                <p class="">{{3}}</p>
+            </td>
+            <td class="col-xs-6">
+                <span class="">{{1}}</span>
+                <span class="">{{2}}</span>
+                <span class="">{{4}}</span>
+            </td>
+            <td class="col-xs-1">{{5}}</td>
+            <td class="col-xs-1">{{6}}</td>
+            <td class="col-xs-1">
+                <span class="">{{7}}</span>
+            </td>
+        </tr>
+{{#if tableEnd}}
+    </tbody>
+</table>
+{{/if}}

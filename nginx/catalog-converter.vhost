@@ -1,0 +1,49 @@
+server {
+        server_name  catalog-converter.exmaple.com;
+
+        access_log  /var/log/nginx/converter.access.log;
+        error_log /var/log/nginx/converter.error.log;
+
+        proxy_read_timeout 10;
+        proxy_connect_timeout 10;
+        # allow big files...
+        client_max_body_size 30M;
+        # and slow uploads
+        proxy_send_timeout 1200;
+
+        # Deny illegal Host headers
+        if ($host !~* ^(catalog-converter.exmaple.com)$ ) {
+                return 444;
+        }
+
+        # dissalow methods
+        if ($request_method !~ ^(OPTIONS|POST)$ ) {
+                # empty response
+                return 444;
+        }
+
+        location / {
+
+                # CORS PRE-FLIGHT REQUESTS
+                if ($request_method = 'OPTIONS') {
+                        more_set_headers 'Access-Control-Allow-Origin: *';
+                        more_set_headers 'Access-Control-Allow-Methods: POST, OPTIONS';
+                        more_set_headers 'Access-Control-Max-Age: 1728000';
+                        more_set_headers 'Content-Type: text/plain; charset=UTF-8';
+                        more_set_headers 'Access-Control-Allow-Headers: Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Mx-ReqToken,X-Requested-With';
+                        return 200;
+                }
+
+                # FILE UPLOADS
+                if ($request_method = 'POST') {
+                        more_set_headers 'Access-Control-Allow-Origin: http://allowd-domain.com';
+                        proxy_pass http://127.0.0.1:3000;
+                }
+        }
+
+        # 204 (No Content) for favicon.ico
+        location = /favicon.ico {
+                #empty_gif;
+                return 204;
+        }
+}
